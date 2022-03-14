@@ -1,7 +1,7 @@
 const Factura = require('../models/factura.model');
-const Producto = require('../models/Producto.model');
+const Producto = require('../models/productos.models');
 const Carrito = require('../models/carrito.model');
-const Categorias = require('../models/Categoria.model');
+const Categorias = require('../models/categoria.model');
 const PDF = require('pdfkit');
 const fs = require('fs');
 

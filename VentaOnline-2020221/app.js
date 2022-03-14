@@ -1,21 +1,18 @@
-// IMPORTACIONES
 const express = require('express');
 const cors = require('cors');
 var app = express();
 
-// IMPORTACIONES RUTAS
 const UsuarioRutas = require('./src/routes/usuario.routes');
-//const EmpresaRutas = require('./src/routes/empresa.routes');
+const CategoriaRutas = require('./src/routes/categorias.routes');
+const ProductoRutas = require('./src/routes/productos.routes');
+const FacturatoRutas = require('./src/routes/factura.routes');
 
-// MIDDLEWARES -> INTERMEDIARIOS
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// CABECERAS
 app.use(cors());
 
-// CARGA DE RUTAS localhost:3000/api/obtenerProductos
-app.use('/api', UsuarioRutas);
+app.use('/api', UsuarioRutas, CategoriaRutas, ProductoRutas,FacturatoRutas);
 
 
 module.exports = app;

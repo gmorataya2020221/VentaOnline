@@ -1,4 +1,4 @@
-const Productos = require('../models/productos.model');
+const Productos = require('../models/productos.models');
 const Proveedor = require('../models/proveedor.model');
 
 
