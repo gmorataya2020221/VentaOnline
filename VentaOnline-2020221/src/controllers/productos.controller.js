@@ -2,12 +2,17 @@ const Productos = require('../models/productos.model');
 const Proveedor = require('../models/proveedor.model');
 
 
-// OBTENER PRODUCTOS
 function ObtenerProductos (req, res) {
     Productos.find({}, (err, productosEncontrados) => {
-
-        return res.send({ productos: productosEncontrados })
-    }).populate('provedores.idProveedor')
+        let tabla = []
+            for (let i = 0; i < productosEncontrados.length; i++) {
+                tabla.push(`Nombre: ${productosEncontrados[i].nombre}, 
+                Disponibles: ${productosEncontrados[i].stock},
+                Precio Unitario: ${productosEncontrados[i].precioCU},
+                Categoria: ${productosEncontrados[i].IDcategoria.nombre}`)
+            }
+        return res.status(200).send({ productos: tabla })
+    }).populate('IDcategoria','nombre')
 }
 
 // AGREGAR PRODUCTOS

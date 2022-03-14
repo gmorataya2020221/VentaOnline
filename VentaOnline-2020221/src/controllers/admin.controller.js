@@ -9,7 +9,6 @@ function RegistrarAdmin(req, res) {
     usuarioModel.usuario = 'ADMIN';
     usuarioModel.password = '123456';
     usuarioModel.rol = 'ROL_ADMIN';
-
     Admin.find({ nombre : 'Admin' }, (err, usuarioEncontrado) => {
         if ( usuarioEncontrado.length == 0 ) {
 
@@ -65,5 +64,6 @@ function LoginAdmin(req, res) {
 }
 
 module.exports = {
-    RegistrarAdmin
+    RegistrarAdmin,
+    LoginAdmin
 }

@@ -12,10 +12,9 @@ api.get('/buscarNombreRegexBody',[md_autenticacion.Auth, md_roles.verUsuario], c
 api.get('/buscarNombreOApellido',[md_autenticacion.Auth, md_roles.verUsuario], controladorUsuario.BusquedaNombreOApellido);
 api.get('/buscarNombreYApellido',[md_autenticacion.Auth, md_roles.verUsuario], controladorUsuario.BusquedaNombreYApellido);
 api.put('/editarUsuario/:idUsuario',[md_autenticacion.Auth, md_roles.verUsuario], controladorUsuario.editarUsuario);
-api.get('/obtenerUsuario',[md_autenticacion.Auth, md_roles.verUsuario], controladorUsuario.obtenerUsuario)
-
-// Carrito
-api.put('/agregarCarrito',[md_autenticacion.Auth, md_roles.verUsuario], controladorUsuario.agregarProductoCarrito);
+api.get('/obtenerUsuario',[md_autenticacion.Auth, md_roles.verUsuario], controladorUsuario.obtenerUsuario);
+api.put('/agregarProducto',md_autenticacion.Auth,controladorUsuario.añadirProductoAcarrito);
+api.delete('/eliminarProducto/:IdProducto',md_autenticacion.Auth,controladorUsuario.eliminarProductoCarrito);
 
 
 module.exports = api;

@@ -1,6 +1,23 @@
 const Categoria = require('../models/categoria.model');
 const Asignacion = require('../models/asignacion.model');
 
+function obtenerCategorias(req,res) {
+    
+    Categorias.find({},(err,CategoriasGuardadas) => {
+        if (err) return res.status(500).send({error: "error en la peticion"})
+        if(!CategoriasGuardadas) return res.status(500).send({mensaje: "error al obtener las categorias"})
+
+        let tabla = []
+            for (let i = 0; i < CategoriasGuardadas.length; i++) {
+                
+                tabla.push(`Nombre: ${CategoriasGuardadas[i].nombre}`)
+            }
+
+
+        return res.status(200).send({Categorias: tabla})
+    })
+}
+
 function agregarCategoria(req, res) {
     const parametros = req.body;
     const modeloCategoria = new Categoria();
@@ -10,7 +27,6 @@ function agregarCategoria(req, res) {
     if(parametros.nombreCategoria){
 
         modeloCategoria.nombreCategoria = parametros.nombreCategoria;
-        modeloCategoria.idUsuario = req.user.sub;
 
         modeloCategoria.save((err, categoriaGuardada) => {
             if(err) return res.status(400).send({ mensaje: 'Erorr en la peticion.' });
@@ -77,7 +93,6 @@ function eliminarCategoriaADefault(req, res) {
 
                     const modeloCategoria = new Categoria();
                     modeloCategoria.nombreCategoria = 'Por Defecto';
-                    modeloCategoria.idUsuario = null;
 
                     modeloCategoria.save((err, categoriaGuardada)=>{
                         if(err) return res.status(400).send({ mensaje: 'Error en la peticion de Guardar categoria'});
@@ -144,6 +159,7 @@ function editarCategoria(req, res) {
 }
 
 module.exports = {
+    obtenerCategorias,
     agregarCategoria,
     asignarCategoria,
     eliminarCategoriaADefault,
